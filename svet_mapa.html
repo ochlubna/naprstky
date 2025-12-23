@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+  <script src="https://cdn.plot.ly/plotly-2.4.1.min.js"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    #plot { height: 100vh; width: 100vw; }
+  </style>
+  <title>Náprstky</title>
+</head>
+
+<body>
+  <div id="plot"></div>
+
+  <script type="text/javascript">
+    const data = [
+      {"colorbar":{"len":0.75,"thickness":14,"title":{"text":"Počet"},"x":0.54},
+       "colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],
+       "geo":"geo",
+       "hovertemplate":"<b>%{location}</b><br>Počet: %{z}<extra></extra>",
+       "locationmode":"country names",
+       "locations":["Czechia","Turkey","Poland","Greece","Croatia","Italy","Bulgaria","Egypt","United States","Spain","Austria","Hungary","Tunisia","Belgium","Slovakia","Portugal","Netherlands","Malta","Qatar","Bosnia and Herzegovina","Mauritius","Romania","Saudi Arabia","Slovenia","Kenya","Finland","United Kingdom","Estonia","Norway","Latvia","Lithuania","Australia"],
+       "type":"choropleth",
+       "z":[203,39,20,18,15,12,8,8,8,7,7,7,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,1,1,1,1]
+      },
+
+      {"domain":{"x":[0.64,1.0],"y":[0.49400000000000005,1.0]},
+       "hole":0.35,
+       "labels":["Česká republika","Turecko","Polsko","Řecko","Chorvatsko","Itálie","Bulharsko","Egypt","USA","Španělsko","Rakousko","Maďarsko"],
+       "showlegend":false,
+       "sort":false,
+       "textinfo":"percent+label",
+       "type":"pie",
+       "values":[203,39,20,18,15,12,8,8,8,7,7,7]
+      },
+
+      {"cells":{"align":"left",
+                "fill":{"color":[["white","white","white","white","white","white","white","white","white","white","white","white"],
+                                 ["#fde725","#482878","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154"],
+                                 ["#fde725","#482878","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154"]]},
+                "font":{"color":[["black","black","black","black","black","black","black","black","black","black","black","black"],
+                                 ["black","white","white","white","white","white","white","white","white","white","white","white"],
+                                 ["black","white","white","white","white","white","white","white","white","white","white","white"]]},
+                "values":[[1,2,3,4,5,6,7,8,9,10,11,12],
+                          ["Česká republika","Turecko","Polsko","Řecko","Chorvatsko","Itálie","Bulharsko","Egypt","USA","Španělsko","Rakousko","Maďarsko"],
+                          [203,39,20,18,15,12,8,8,8,7,7,7]]},
+       "columnwidth":[0.15,0.3,0.2],
+       "domain":{"x":[0.64,1.0],"y":[0.0,0.41400000000000003]},
+       "header":{"align":"left","fill":{"color":"#EDEDED"},"font":{"color":"black"},"values":["#","Stát","Počet"]},
+       "type":"table"
+      }
+    ];
+
+    const layout = {
+      "annotations":[
+        {"font":{"size":16},"showarrow":false,"x":0.27,"xanchor":"center","xref":"paper","y":1.0000000000000002,"yanchor":"bottom","yref":"paper"},
+        {"font":{"size":16},"showarrow":false,"text":"Podíl států","x":0.8200000000000001,"xanchor":"center","xref":"paper","y":1.0000000000000002,"yanchor":"bottom","yref":"paper"},
+        {"font":{"size":16},"showarrow":false,"text":"List TOP 12 států","x":0.8200000000000001,"xanchor":"center","xref":"paper","y":0.41400000000000003,"yanchor":"bottom","yref":"paper"}
+      ],
+      "geo":{
+        "domain":{"x":[0.0,0.54],"y":[0.0,1.0]},
+        "projection":{"type":"natural earth"},
+        "showcoastlines":true,
+        "showcountries":true
+      },
+      "margin":{"b":10,"l":10,"r":10,"t":70},
+
+      "title":{
+        "text":"Náprstky: přehled států\n",
+        "font":{"size":28,"family":"Calibri","color":"black"}
+      }
+    };
+
+    Plotly.newPlot("plot", data, layout, {"responsive": true});
+  </script>
+</body>
+</html>
+
