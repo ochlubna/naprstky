@@ -7,14 +7,16 @@
   <style>
     html, body { height: 100%; margin: 0; }
     #plot { height: 100vh; width: 100vw; }
+
+    /* Always show Plotly modebar */
     .modebar { display: block !important; opacity: 1 !important; }
+
+    /* Position modebar */
     .js-plotly-plot .plotly .modebar {
       left: 16px !important;
       right: auto !important;
       top: 16px !important;
     }
-
-
   </style>
   <title>Náprstky</title>
 </head>
@@ -24,49 +26,61 @@
 
   <script type="text/javascript">
     const data = [
-      {"colorbar":{"len":0.75,"thickness":14,"title":{"text":"Počet"},"x":0.54},
-       "colorscale":[[0.0,"#440154"],[0.1111111111111111,"#482878"],[0.2222222222222222,"#3e4989"],[0.3333333333333333,"#31688e"],[0.4444444444444444,"#26828e"],[0.5555555555555556,"#1f9e89"],[0.6666666666666666,"#35b779"],[0.7777777777777778,"#6ece58"],[0.8888888888888888,"#b5de2b"],[1.0,"#fde725"]],
-       "geo":"geo",
-       "hovertemplate":"<b>%{location}</b><br>Počet: %{z}<extra></extra>",
-       "locationmode":"country names",
-       "locations":["Czechia","Turkey","Poland","Greece","Croatia","Italy","Bulgaria","Egypt","United States","Spain","Austria","Hungary","Tunisia","Belgium","Slovakia","Portugal","Netherlands","Malta","Qatar","Bosnia and Herzegovina","Mauritius","Romania","Saudi Arabia","Slovenia","Kenya","Finland","United Kingdom","Estonia","Norway","Latvia","Lithuania","Australia"],
-       "type":"choropleth",
-       "z":[203,39,20,18,15,12,8,8,8,7,7,7,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,1,1,1,1]
+      {
+        "colorbar":{"len":0.75,"thickness":14,"title":{"text":"Počet"},"x":0.54},
+        "colorscale":[
+          [0.0,"#440154"],
+          [0.1111111111111111,"#482878"],
+          [0.2222222222222222,"#3e4989"],
+          [0.3333333333333333,"#31688e"],
+          [0.4444444444444444,"#26828e"],
+          [0.5555555555555556,"#1f9e89"],
+          [0.6666666666666666,"#35b779"],
+          [0.7777777777777778,"#6ece58"],
+          [0.8888888888888888,"#b5de2b"],
+          [1.0,"#fde725"]
+        ],
+        "geo":"geo",
+        "hovertemplate":"<b>%{location}</b><br>Počet: %{z}<extra></extra>",
+        "locationmode":"country names",
+        "locations":[
+          "Czechia","Turkey","Poland","Greece","Croatia","Italy","Bulgaria","Egypt","United States","Spain",
+          "Austria","Hungary","Tunisia","Belgium","Slovakia","Portugal","Netherlands","Malta","Qatar",
+          "Bosnia and Herzegovina","Mauritius","Romania","Saudi Arabia","Slovenia","Kenya","Finland",
+          "United Kingdom","Estonia","Norway","Latvia","Lithuania","Australia"
+        ],
+        "type":"choropleth",
+        "z":[203,39,20,18,15,12,8,8,8,7,7,7,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,1,1,1,1]
       },
 
-      {"domain":{"x":[0.64,1.0],"y":[0.49400000000000005,1.0]},
-       "hole":0.35,
-       "labels":["Česká republika","Turecko","Polsko","Řecko","Chorvatsko","Itálie","Bulharsko","Egypt","USA","Španělsko","Rakousko","Maďarsko"],
-       "showlegend":false,
-       "sort":false,
-       "textinfo":"percent+label",
-       "type":"pie",
-       "values":[203,39,20,18,15,12,8,8,8,7,7,7]
+      /* PIE will be computed below (TOP 12 + Ostatní) */
+      {
+        "domain":{"x":[0.64,1.0],"y":[0.49400000000000005,1.0]},
+        "hole":0.35,
+        "labels":[],
+        "showlegend":false,
+        "sort":false,
+        "textinfo":"percent+label",
+        "type":"pie",
+        "values":[]
       },
 
-      {"cells":{"align":"left",
-                "fill":{"color":[["white","white","white","white","white","white","white","white","white","white","white","white"],
-                                 ["#fde725","#482878","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154"],
-                                 ["#fde725","#482878","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#440154"]]},
-                "font":{"color":[["black","black","black","black","black","black","black","black","black","black","black","black"],
-                                 ["black","white","white","white","white","white","white","white","white","white","white","white"],
-                                 ["black","white","white","white","white","white","white","white","white","white","white","white"]]},
-                "values":[[1,2,3,4,5,6,7,8,9,10,11,12],
-                          ["Česká republika","Turecko","Polsko","Řecko","Chorvatsko","Itálie","Bulharsko","Egypt","USA","Španělsko","Rakousko","Maďarsko"],
-                          [203,39,20,18,15,12,8,8,8,7,7,7]]},
-       "columnwidth":[0.15,0.3,0.2],
-       "domain":{"x":[0.64,1.0],"y":[0.0,0.41400000000000003]},
-       "header":{"align":"left","fill":{"color":"#EDEDED"},"font":{"color":"black"},"values":["#","Stát","Počet"]},
-       "type":"table"
+      /* TABLE will be computed below (ALL states) */
+      {
+        "cells":{"align":"left","values":[[],[],[]]},
+        "columnwidth":[0.12,0.58,0.30],
+        "domain":{"x":[0.64,1.0],"y":[0.0,0.41400000000000003]},
+        "header":{"align":"left","fill":{"color":"#EDEDED"},"font":{"color":"black"},"values":["#","Stát","Počet"]},
+        "type":"table"
       }
     ];
 
     const layout = {
-        "dragmode":"pan",
-"annotations":[
+      "dragmode":"pan",
+      "annotations":[
         {"font":{"size":16},"showarrow":false,"text":"Světová mapa","x":0.27,"xanchor":"center","xref":"paper","y":1.0000000000000002,"yanchor":"bottom","yref":"paper"},
         {"font":{"size":16},"showarrow":false,"text":"Podíl států","x":0.8200000000000001,"xanchor":"center","xref":"paper","y":1.0000000000000002,"yanchor":"bottom","yref":"paper"},
-        {"font":{"size":16},"showarrow":false,"text":"List TOP 12 států","x":0.8200000000000001,"xanchor":"center","xref":"paper","y":0.41400000000000003,"yanchor":"bottom","yref":"paper"}
+        {"font":{"size":16},"showarrow":false,"text":"List všech států","x":0.8200000000000001,"xanchor":"center","xref":"paper","y":0.41400000000000003,"yanchor":"bottom","yref":"paper"}
       ],
       "geo":{
         "domain":{"x":[0.0,0.54],"y":[0.0,1.0]},
@@ -75,21 +89,140 @@
         "showcountries":true
       },
       "margin":{"b":10,"l":10,"r":10,"t":70},
-
       "title":{
-        "text":"Náprstky: přehled států\n",
+        "text":"Náprstky: přehled států",
         "font":{"size":28,"family":"Calibri","color":"black"}
       }
     };
 
-Plotly.newPlot("plot", data, layout, {
-  responsive: true,
-  scrollZoom: true,
-  displaylogo: false,
-  displayModeBar: true   // ← vynutí tlačítka
-});
+    // Build ALL-states table + PIE (TOP 12 + Ostatní) from the choropleth
+    const chor = data[0];
+    const locations = chor.locations;
+    const counts = chor.z;
 
+    // English -> Czech labels (fallback to EN if missing)
+    const enToCz = {
+      "Czechia":"Česká republika",
+      "Turkey":"Turecko",
+      "Poland":"Polsko",
+      "Greece":"Řecko",
+      "Croatia":"Chorvatsko",
+      "Italy":"Itálie",
+      "Bulgaria":"Bulharsko",
+      "Egypt":"Egypt",
+      "United States":"USA",
+      "Spain":"Španělsko",
+      "Austria":"Rakousko",
+      "Hungary":"Maďarsko",
+      "Tunisia":"Tunisko",
+      "Belgium":"Belgie",
+      "Slovakia":"Slovensko",
+      "Portugal":"Portugalsko",
+      "Netherlands":"Nizozemí",
+      "Malta":"Malta",
+      "Qatar":"Katar",
+      "Bosnia and Herzegovina":"Bosna a Hercegovina",
+      "Mauritius":"Mauricius",
+      "Romania":"Rumunsko",
+      "Saudi Arabia":"Saudská Arábie",
+      "Slovenia":"Slovinsko",
+      "Kenya":"Keňa",
+      "Finland":"Finsko",
+      "United Kingdom":"Velká británie",
+      "Estonia":"Estonsko",
+      "Norway":"Norsko",
+      "Latvia":"Lotyšsko",
+      "Lithuania":"Litva",
+      "Australia":"Austrálie"
+    };
+
+    const rows = locations.map((en, i) => ({
+      en,
+      cz: enToCz[en] || en,
+      count: counts[i]
+    }));
+
+    rows.sort((a, b) => b.count - a.count);
+
+    // Table data (ALL states)
+    const rank = rows.map((_, i) => i + 1);
+    const stateCz = rows.map(r => r.cz);
+    const stateCount = rows.map(r => r.count);
+
+    // Same colors between map and table: Viridis palette (same as choropleth colorscale)
+    const viridis = [
+      "#440154","#482878","#3e4989","#31688e",
+      "#26828e","#1f9e89","#35b779","#6ece58",
+      "#b5de2b","#fde725"
+    ];
+
+    const minVal = Math.min(...counts);
+    const maxVal = Math.max(...counts);
+
+    function valueToColor(v) {
+      const t = (v - minVal) / ((maxVal - minVal) || 1);
+      const idx = Math.round(t * (viridis.length - 1));
+      return viridis[Math.max(0, Math.min(viridis.length - 1, idx))];
+    }
+
+    function textColor(hex) {
+      const h = hex.replace("#","");
+      const r = parseInt(h.substring(0,2), 16);
+      const g = parseInt(h.substring(2,4), 16);
+      const b = parseInt(h.substring(4,6), 16);
+      const lum = 0.2126*r + 0.7152*g + 0.0722*b;
+      return lum < 140 ? "white" : "black";
+    }
+
+    const rowColors = rows.map(r => valueToColor(r.count));
+const textColors = stateCz.map(name =>
+  name === "Česká republika" ? "black" : "white"
+);
+
+    data[2].cells = {
+      align: "left",
+      values: [rank, stateCz, stateCount],
+      fill: {
+        color: [
+          Array(rank.length).fill("white"),
+          rowColors,
+          rowColors
+        ]
+      },
+      font: {
+        color: [
+          Array(rank.length).fill("black"),
+          textColors,
+          textColors
+        ]
+      }
+    };
+
+    // Pie: TOP 12 + Ostatní
+    const topN = 12;
+    const topRows = rows.slice(0, topN);
+    const otherSum = rows.slice(topN).reduce((s, r) => s + r.count, 0);
+
+    const pieLabels = topRows.map(r => r.cz);
+    const pieValues = topRows.map(r => r.count);
+
+    if (otherSum > 0) {
+      pieLabels.push("Ostatní");
+      pieValues.push(otherSum);
+    }
+
+    data[1].labels = pieLabels;
+    data[1].values = pieValues;
+    data[1].showlegend = false;
+    data[1].hovertemplate = "<b>%{label}</b><br>Počet: %{value}<br>Podíl: %{percent}<extra></extra>";
+
+
+    Plotly.newPlot("plot", data, layout, {
+      responsive: true,
+      scrollZoom: true,
+      displaylogo: false,
+      displayModeBar: true
+    });
   </script>
 </body>
 </html>
-
