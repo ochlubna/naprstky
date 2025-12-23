@@ -7,6 +7,14 @@
   <style>
     html, body { height: 100%; margin: 0; }
     #plot { height: 100vh; width: 100vw; }
+    .modebar { display: block !important; opacity: 1 !important; }
+    .js-plotly-plot .plotly .modebar {
+      left: 16px !important;
+      right: auto !important;
+      top: 16px !important;
+    }
+
+
   </style>
   <title>Náprstky</title>
 </head>
@@ -54,8 +62,9 @@
     ];
 
     const layout = {
-      "annotations":[
-        {"font":{"size":16},"showarrow":false,"x":0.27,"xanchor":"center","xref":"paper","y":1.0000000000000002,"yanchor":"bottom","yref":"paper"},
+        "dragmode":"pan",
+"annotations":[
+        {"font":{"size":16},"showarrow":false,"text":"Světová mapa","x":0.27,"xanchor":"center","xref":"paper","y":1.0000000000000002,"yanchor":"bottom","yref":"paper"},
         {"font":{"size":16},"showarrow":false,"text":"Podíl států","x":0.8200000000000001,"xanchor":"center","xref":"paper","y":1.0000000000000002,"yanchor":"bottom","yref":"paper"},
         {"font":{"size":16},"showarrow":false,"text":"List TOP 12 států","x":0.8200000000000001,"xanchor":"center","xref":"paper","y":0.41400000000000003,"yanchor":"bottom","yref":"paper"}
       ],
@@ -73,7 +82,13 @@
       }
     };
 
-    Plotly.newPlot("plot", data, layout, {"responsive": true});
+Plotly.newPlot("plot", data, layout, {
+  responsive: true,
+  scrollZoom: true,
+  displaylogo: false,
+  displayModeBar: true   // ← vynutí tlačítka
+});
+
   </script>
 </body>
 </html>
